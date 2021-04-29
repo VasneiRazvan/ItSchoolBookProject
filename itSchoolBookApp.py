@@ -55,7 +55,10 @@ def update_book():
 
 
 def share_book():
-    print("Share book option")
+    book_name = input('What is the name of the book you want to share? -> ')
+    shared_with = input('With whom do you like to share? -> ')
+    import csv
+
 
 
 # Main menu for user
