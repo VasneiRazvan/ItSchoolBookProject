@@ -3,6 +3,8 @@ def add_book():
     author_name = input("Insert a author name -> ")
     # importing csv lib
     import csv
+    #  open csv file in append mode
+
     with open('booksDB.csv', mode='a') as file:
         writer = csv.DictWriter(file, fieldnames=[
             'BookName', 'AuthorName', 'SharedWith', 'IsRead'
@@ -28,8 +30,8 @@ def list_books():
 
 
 def update_book():
-    book_name = input('Enter the book name: ')
-    book_read = input('Is the book read(Y/N)?: ')
+    book_name = input("Enter book name: ")
+    book_read = input("Is the book read?(Y/N)?")
     if book_read == 'Y':
         book_read = True
     else:
@@ -37,28 +39,43 @@ def update_book():
     import csv
     # rows = []
     with open('booksDB.csv', mode='r') as file:
-        #  rows = list(csv.DictReader(file))
-        rows = list(csv.DictReader(file, fieldnames=('BookName', 'AuthorName', 'SharedWith', 'IsRead')))
+        # rows = list(csv.DictReader(file))
+        rows = list(csv.DictReader(file, fieldnames=("BookName", "AuthorName", "SharedWith", "IsRead")))
         for row in rows:
-            if row.get('BookName') == book_name:
+            if row["BookName"] == book_name:
                 row["IsRead"] = book_read
-                csv_writer = csv.DictWriter(file, fieldnames=[
-                    'BookName', 'AuthorName', 'SharedWith', 'IsRead'
-                ])
-                csv_writer.writerow({'BookName': row.get('BookName'),
-                                     'AuthorName': row.get('AuthorName'),
-                                     'SharedWith': row.get('SharedWith'),
-                                     'IsRead': book_read}
-                                    )
                 break
-        print('Book was updated successfully')
+        with open('booksDB.csv', mode='w'):
+            csv_writer = csv.DictWriter(file, fieldnames=[
+                "BookName", "AuthorName", "SharedWith", "IsRead"
+            ])
+            csv_writer.writerow({"BookName": row.get("BookName"),
+                                 "AuthorName": row.get("AuthorName"),
+                                 "SharedWith": row.get("SharedWith"),
+                                 "IsRead": book_read}
+                                )
+        print("Book was updated successfully")
 
 
 def share_book():
     book_name = input('What is the name of the book you want to share? -> ')
     shared_with = input('With whom do you like to share? -> ')
     import csv
-
+    with open('booksDB.csv', mode='r') as file:
+        rows = list(csv.DictReader(file, fieldnames=('BookName', 'AuthorName', 'SharedWith', 'IsRead')))
+        for row in rows:
+            if row['BookName'] == book_name:
+                row['SharedWith'] = shared_with
+                break
+            else:
+                print('Book is not in DB')
+        with open('booksDB.csv', mode='w'):
+            csv_writer = csv.DictWriter(file, fieldnames=['BookName', 'AuthorName', 'SharedWith', 'IsRead'])
+            csv_writer.writerow({'BookName': row.get('BookName'),
+                                 'AuthorName': row.get('AuthorName'),
+                                 'SharedWith': shared_with,
+                                 'IsRead': row.get('IsRead')}
+                                )
 
 
 # Main menu for user
