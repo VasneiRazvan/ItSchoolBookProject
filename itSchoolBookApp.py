@@ -4,7 +4,6 @@ def add_book():
     # importing csv lib
     import csv
     #  open csv file in append mode
-
     with open('booksDB.csv', mode='a') as file:
         writer = csv.DictWriter(file, fieldnames=[
             'BookName', 'AuthorName', 'SharedWith', 'IsRead'
@@ -45,7 +44,7 @@ def update_book():
             if row["BookName"] == book_name:
                 row["IsRead"] = book_read
                 break
-        with open('booksDB.csv', mode='w'):
+        with open('booksDB.csv', mode='w') as file:
             csv_writer = csv.DictWriter(file, fieldnames=[
                 "BookName", "AuthorName", "SharedWith", "IsRead"
             ])
@@ -69,7 +68,7 @@ def share_book():
                 break
             else:
                 print('Book is not in DB')
-        with open('booksDB.csv', mode='w'):
+        with open('booksDB.csv', mode='w') as file:
             csv_writer = csv.DictWriter(file, fieldnames=['BookName', 'AuthorName', 'SharedWith', 'IsRead'])
             csv_writer.writerow({'BookName': row.get('BookName'),
                                  'AuthorName': row.get('AuthorName'),
