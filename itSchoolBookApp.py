@@ -36,9 +36,9 @@ def update_book():
     else:
         book_read = False
     import csv
-    # rows = []
+    rows = []
     with open('booksDB.csv', mode='r') as file:
-        # rows = list(csv.DictReader(file))
+        rows = list(csv.DictReader(file))
         rows = list(csv.DictReader(file, fieldnames=("BookName", "AuthorName", "SharedWith", "IsRead")))
         for row in rows:
             if row["BookName"] == book_name:
@@ -77,21 +77,41 @@ def share_book():
                                 )
 
 
-# Main menu for user
-print("Menu:")
-print("1 : Add a book")
-print("2 : List books")
-print("3 : Update book")
-print("4 : Share book")
-option = int(input("Select one option -> "))
+def close_application():
+    close_app = input('Do You want to quit the app? Y/N -> ')
+    while close_app == 'N':
+        main_menu()
+        return
+    print('The app will close.')
 
-if option == 1:
-    add_book()
-elif option == 2:
-    list_books()
-elif option == 3:
-    update_book()
-elif option == 4:
-    share_book()
-else:
-    print('Not a valid option')
+
+def main_menu():
+    menu = ("""Main Menu:
+    1. Add a book
+    2. List books
+    3. Update books
+    4. Share books
+    5. Close Application
+    """)
+    for option in menu:
+        print(menu)
+        option = int(input('Please select one option from the menu -> '))
+        if option == 1:
+            add_book()
+            close_application()
+        elif option == 2:
+            list_books()
+            close_application()
+        elif option == 3:
+            update_book()
+            close_application()
+        elif option == 4:
+            share_book()
+            close_application()
+        elif option == 5:
+            close_application()
+        else:
+            print('Not a valid option')
+
+
+main_menu()
