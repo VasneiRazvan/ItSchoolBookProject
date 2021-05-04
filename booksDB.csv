@@ -1,2 +1,6 @@
 testbook,testauthor,razvan,True
 
+testbook1,testauthor1,None,False
+testbook2,testauthor2,None,False
+testbook3,testauthor3,None,False
+testbook4,testauthor4,None,False
