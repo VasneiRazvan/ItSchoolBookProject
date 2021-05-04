@@ -104,7 +104,7 @@ def start_book():
         rows = list(csv.DictReader(file, fieldnames=('BookName', 'AuthorName', 'SharedWith', 'IsRead',
                                                      "StartDate", "EndDate")))
         for row in rows:
-            if row['BookName'] == book_name:
+            if row['BookName'] == 'BookName':
                 row['StartDate'] = start_date
                 break
         with open('booksDB.csv', mode='w') as file:
@@ -127,7 +127,7 @@ def end_book():
         rows = list(csv.DictReader(file, fieldnames=('BookName', 'AuthorName', 'SharedWith', 'IsRead',
                                                      "StartDate", "EndDate")))
         for row in rows:
-            if row['BookName'] == book_name:
+            if row['BookName'] == 'BookName':
                 row['EndDate'] = end_date
                 break
         with open('booksDB.csv', mode='w') as file:
