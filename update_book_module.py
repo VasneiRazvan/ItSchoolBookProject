@@ -22,3 +22,4 @@ def update_book():
                                      "SharedWith": row.get("SharedWith"),
                                      "IsRead": book_read})
         print("Book was updated successfully")
+        asadf
