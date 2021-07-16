@@ -21,7 +21,7 @@ def end_book():
                                  'SharedWith': row.get('SharedWith'),
                                  'IsRead': row.get('IsRead'),
                                  'StartDate': row.get('StartDate'),
-                                 'EndDate': end_date,
+                                 'EndDate': row.get('EndDate'),
                                  'Notes': row.get('Notes')})
 
 
